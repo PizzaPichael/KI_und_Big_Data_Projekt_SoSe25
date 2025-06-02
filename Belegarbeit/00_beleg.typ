@@ -50,7 +50,14 @@
 
 #pagebreak()
 
-#include "einfuehrung.typ"
+#include "01_einfuehrung_problemstellung.typ"
+#include "02_0_datenbeschaffung.typ"
+#include "02_1_vertiefung_datenbeschaffung.typ"
+#include "03_eda.typ"
+#include "04_feature_engineering.typ"
+#include "05_modelltraining.typ"
+#include "06_modellevaluierung.typ"
+#include "07_fazit.typ"
 
-#bibliography("bibliography.bib")
+#bibliography("bibliography.bib", title: "10. Bibliographie")
 
