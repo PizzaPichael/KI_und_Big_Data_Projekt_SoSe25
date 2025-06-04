@@ -1,1 +1,1 @@
-= Exploratorische Datenanalyse
+= Explorative Datenanalyse
