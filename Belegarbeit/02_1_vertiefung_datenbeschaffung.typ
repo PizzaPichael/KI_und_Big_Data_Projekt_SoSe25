@@ -47,6 +47,22 @@ Virtuelle, dreidimensionale Umgebungen werden heute bereits vielseitig zum Train
 
 ===== Durchführung
 
+Modellierung einer Szene in Unity
+Tennisplatz in einer "Halle". Halle ist ein Cube. Tennisball auf dem Tennisplatz. Plan: Mit Blender die Maße des Platzes und des Balls messen. Entsprechend sklaieren, dass beide realistische Maße haben. Tennisplatz ca. 23,77 m x 10.97 m @noauthor_abmessungen_nodate. Tennisball Durchmesser ca. 6.5 cm @valentino_durchmesser_2023. Ich habe mich für einen Durchmesser von 6.6cm entschieden was in Unity eienr Scale des Balls von 3.4 in alle Richtungen entspricht.
+Die Kamera wird an einem festen Punkt platziert, in der Mitte de Platzes, direkt neben dem Netz, mit Blick vom Netz weg zum Spielfeldrand. Der Ball soll dann, in der Theorie, durch ein Script an zufälligen Stellen innerhalb des Blickfeldes der Kamera platziert werden. Dann soll das script einen Screenshot machen und die Entfernung des Balls zur Kamera berechnen. Die Entfernung des Balls wird dann in einem Textdokument gespeichert, das wie der Screenshot heißt.
+
+Kamera:
+Es wurde versucht die Einstellungen der virtuellen Kamera so realistisch wie möglich an die der evtl. später genutzten RaspBerry Pi Camera Module 3 @noauthor_camera_nodate anzupassen. Einige Einstellungen lassen sich aber nicht 1 zu 1 übernehmen. Z.B. kann das Field of View nur entweder Hotizontal oder Vertikal angepasst werden. Wobei eine Änderung des einen Wertes, den anderen mit verändert. Ich habe mich dann z.B. auf eine horizontale FOV von 66° festgelegt, da ich die breite des aufgenommenen Szenenausschnittes nicht unnötig verbreitern wollte. Entgegen der in der Doku stehenden 41° für die vertikale FOV beträgt die vertikale FOV in Unity dann ca. 34.4°.
+Ein weitere Wert, der sich nicht ändern lässt, ohne die Einstellungen für die FOV zu beeinflussen ist die Focal Length. Es kann sein, dass ich die Einstellungen nicht vollends verstehe, ich wollte mich aber auch nicht zu lange mit der Kamera aufhalten. Sollte es aber nicht möglich sein, die Werte einer realen Kamera vollständig zu übernehmen, könnte das eventuell einen Einfluss auf die Leistung des Models in einer realen umgebung haben, da unterschiedliche FOV Werte Objekte unterschiedlich darstellen/verzerren, da eine Kamera mit einem größeren FOV dazu neigt, Objekte Objekte kleiner darzustellen, als mit kleineren FOV Werten.
+
+Kamera auf der Y Achse in 20cm Höhe platziert, Annahme, dass das die Höhe der Kamera auf dem Roboter sei.
+Auf der X-Achse -14.54 und -2 auf der Z-Achse.
+
+Ball:
+Der Ball soll zufällig im FOV Radius Feld der Kamera platziert werden. Die Höhe Y-Achse bleibt immer gleich auf 0.034.
+Zuerst wird nur der Z-Achsen-Wert, also die Entfernung verändert. X-Achse bleibt -14.5. Der Ball befindet sich also in einer Linie mit der Kamera auf der X-Achse.
+
+
 === Versuchsaufbau des gewählten Ansatzes
 === Durchführung des gewählten Ansatzes
 
