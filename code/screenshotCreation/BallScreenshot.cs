@@ -10,6 +10,7 @@ using System.Collections;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 /* Serializable ImageAnnotation object that the distance annotations are saved in.
 Needs to be serializable as they need to be converted to JSON data later on using 
@@ -149,6 +150,17 @@ public class BallScreenshot : MonoBehaviour
         //Debug.Log($"JSON: {arrayJsonString}");
 
         File.WriteAllText(jsonFileName, arrayJsonString);
+
+        // Additionally save as csv.
+        StringBuilder csv = new StringBuilder();
+        csv.AppendLine("ImageName,Distance");
+
+        foreach (var annotation in annotations)
+        {
+            csv.AppendLine($"{annotation.ImageName},{annotation.Distance.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+        }
+        string csvFileName = $"{distanceLabelsFolderPath}/annotations.csv";
+        File.WriteAllText(csvFileName, csv.ToString());
 
         Debug.Log("Done.");
 
