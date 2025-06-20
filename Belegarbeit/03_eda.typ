@@ -18,8 +18,9 @@ Der key ImageName enthält ein string-value. Der key Distanz ein float-value mit
 Das gleiche liegt für die csv-Datei vor. Sier verfügt über zwei Spalten, ImageName und Distance.
 Beide Spalten enthalten die selben Daten wie die JSON Datei.
 
-Es fehlen keine Daten.
 Die korrektheit der Ausgegebenen Distanzen wurde mehrmals mit der eingabe Manueller Distanzen überprüft.
 Die Namen der Bilddateien stimmen in beiden Fällen mit denen der entsprechenden Bilddaten überein.
 
-**TBD EDA IN JUPYTER DURCHFÜHREN**
+Anhand des eda notebooks lässt sich erkennen dass für die Anzahl n an Bidlern je ein Datenpunk vorliegt.
+
+
