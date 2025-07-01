@@ -86,4 +86,16 @@ Kurzfristig ergeben sich nun zwei Lösungsmöglichkeiten:
 Da die Frage dieser Arbeit ist, ob es möglich ist Distanzen mittels eines NN aus einem zweidimensionalen Bild heraus zu schätzen, werde ich mich für die zweite Möglichkeit entscheiden.
 Dafür werde ich das Script so anpassen, dass eine maximale Entfernung der Ballplatzierung von der Kamera als Parameter eingegeben werden kann.
 
+Nach der Anpassung lässt sich eine wesentliche Verbesserung der Performance beobachten, siehe @stat-max-drei.
 
+#figure(
+  image("../assets/unitySetup/statistik_max_drei.png", width: 70%),
+  caption: [
+    Statistische Auswertung der richtig, falsch und nicht erkannten Tennisbälle als Sportsball Objekt auf blauem Hintergrund mit 200 Screenhots und einer maximalen Entfernung des Balls von 3 Metern.
+  ],
+)<stat-max-drei>
+
+Als nächstes geht es daran, einen Datensatz zu schaffen mit genug Bildern für das Training eines NN.
+Zufällig wird hier die Zahl 2000 gewählt.
+
+Jetzt müssen hier weitere Daten heraus gezogen werden, nämlich die Boundignbox koordinaten sowie dessen Größe, die jedoch auch aus den Koordinaten berechnet werden kann.
