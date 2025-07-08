@@ -34,7 +34,7 @@ public class ImageAnnotationList
 
 
 /* Main script part. Is a Unity-MonoBehaviour, meaning a special type of C#-class, that is
-provided by Unity. Enables to add a script to a gameobject in unity-editor. Can use methodes
+provided by Unity that enables to add a script to a gameobject in unity-editor. Can use methodes
 like Start(), Update() and Coroutines to control behaviour of unity objects.
 */
 public class BallScreenshot : MonoBehaviour
@@ -47,8 +47,11 @@ public class BallScreenshot : MonoBehaviour
     public bool enterManualDistance = false;
     public float manualDistance = 0f;
 
+    public bool useManualMaxDistance = false;
+    public float manualMaxDistance = 0f;
+
     // Internal script parameters, not visible/editable in the editor, only used for scriptlogic
-    private const float fixedX = -14.5f;
+    private const float fixedX = -14f;
     private const float fixedY = 0.03f;
     private const float minZ = 0.5f;
     private const float maxZ = 6.5f;
@@ -65,7 +68,7 @@ public class BallScreenshot : MonoBehaviour
         StartCoroutine(MoveBallAndCapture());
     }
 
-    /* Helper function to wat until the amount of frames given by frameCount have been 
+    /* Helper function to wait until the amount of frames given by frameCount have been 
     rendered. Is needed because moving the ball takes several frame rendering cycles.
     If not used, screenshots will be taken while the ball is still "moving" and the ball 
     gets blurry in the screenshot. Waits until the end of each frame rendering.
@@ -83,6 +86,7 @@ public class BallScreenshot : MonoBehaviour
     */
     IEnumerator MoveBallAndCapture()
     {
+
         DateTime currentDateTime = DateTime.Now;
         string currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd_HH-mm-ss");
 
@@ -96,7 +100,15 @@ public class BallScreenshot : MonoBehaviour
 
         for (int i = 0; i < screenshotCount; i++)
         {
-            float randomZ = UnityEngine.Random.Range(minZ, maxZ);
+            float randomZ;
+            if (useManualMaxDistance)
+            {
+                randomZ = UnityEngine.Random.Range(minZ, manualMaxDistance);
+            }
+            else
+            {
+                randomZ = UnityEngine.Random.Range(minZ, maxZ);
+            }
             float randomXRot = UnityEngine.Random.Range(minBallRotation, maxBallRotation);
             float randomYRot = UnityEngine.Random.Range(minBallRotation, maxBallRotation);
             float randomZRot = UnityEngine.Random.Range(minBallRotation, maxBallRotation);
@@ -131,10 +143,8 @@ public class BallScreenshot : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        //Debug.Log($"Annotations: {annotations.ToString()}");
         ImageAnnotationList wrapper = new ImageAnnotationList();
         wrapper.annotations = annotations;
-        //Debug.Log($"Annotations wrapper: {wrapper.ToString()}");
         string jsonString = JsonUtility.ToJson(wrapper);
         // Edit the json string, otherwise it will have a `annotations:` key at the start. 
         int start = jsonString.IndexOf('[');
@@ -146,8 +156,6 @@ public class BallScreenshot : MonoBehaviour
                                          .Replace("]", "\n]");
 
         string jsonFileName = $"{distanceLabelsFolderPath}/annotations.json";
-        //Debug.Log($"Annotation count: {annotations.Count}");
-        //Debug.Log($"JSON: {arrayJsonString}");
 
         File.WriteAllText(jsonFileName, arrayJsonString);
 
